@@ -258,27 +258,3 @@ chmod -R 755 /etc/openvpn/
 chmod -R 777 /etc/openvpn/crl.pem
 chmod g+s /etc/openvpn/clients/
 chmod g+s /etc/openvpn/easy-rsa/
-
-#Generate a self-signed certificate for the web server
-mv /etc/lighttpd/ssl/ /etc/lighttpd/ssl.$$/
-mkdir /etc/lighttpd/ssl/
-openssl req -new -x509 -keyout /etc/lighttpd/ssl/server.pem -out /etc/lighttpd/ssl/server.pem -days 9999 -nodes -subj "/C=US/ST=California/L=San Francisco/O=example.com/OU=Ops Department/CN=example.com"
-chmod 744 /etc/lighttpd/ssl/server.pem
-
-
-#Configure the web server with the lighttpd.conf from GitHub
-mv /etc/lighttpd/lighttpd.conf /etc/lighttpd/lighttpd.conf.$$
-wget -O /etc/lighttpd/lighttpd.conf https://raw.githubusercontent.com/nkyo/simple-openvpn-server/master/lighttpd.conf
-
-#install the webserver scripts
-rm /var/www/html/*
-wget -O /var/www/html/index.sh https://raw.githubusercontent.com/nkyo/simple-openvpn-server/master/index.sh
-
-wget -O /var/www/html/download.sh https://raw.githubusercontent.com/nkyo/simple-openvpn-server/master/download.sh
-chown -R www-data:www-data /var/www/html/
-
-#set the password file for the WWW logon
-echo "admin:$ADMINPASSWORD" >> /etc/lighttpd/.lighttpdpassword
-
-#restart the web server
-service lighttpd restart
