@@ -1,24 +1,6 @@
 Simple OpenVPN Server
 ====
 
-OpenVPN is a one of the most popular VPN platforms for a lot of good reasons. It's free, open source, and there are clients for just about every platform imaginable. For these reasons, OpenVPN is the choice for organizations and individuals alike. 
-
-There are dedicated appliances for OpenVPN that work well for enterprises, but for smaller organizations and individuals, these are overkill.  This little project grew out of a desire to create a simple, web based UI for managing OpenVPN while as well as creating a fully automated installer of the the software on a rather lower-powered Linux host, such as an entry level VM on Azure, a Virtual Private Server (VPS) or even a container.
-
-A special thanks goes out to the folks behind [openvpn-install](https://github.com/Nyr/openvpn-install) for their wonderful project, which serves as an interactive installer on the command line. Much of the heavy lifting for the installer here is from the script there. 
-
-The scripts assumes that there is NOT an instance of OpenVPN already installed on the machine and that port 443 is not in use by another web server for HTTPS. Likewise, this script was built for current Debian/Ubuntu distros.
-
-
-## Installing OpenVPN
-
-Optionally, you can do a completely automated deployment to Azure and skip past the installation to **Managing Clients**.
-
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftheonemule%2Fsimple-openvpn-server%2Fmaster%2Fopenvpn-template.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-
-Otherwise, use the installer:
-
-1. Pull up a terminal or SSH into the target server.
 
 1. Logon as root
 
@@ -26,19 +8,13 @@ Otherwise, use the installer:
 	sudo -i
 	````
 
-1. Download the installer script.
+2. Download the installer script.
 
 	````
-	wget https://raw.githubusercontent.com/theonemule/simple-openvpn-server/master/openvpn.sh
+	wget https://raw.githubusercontent.com/nkyo/simple-openvpn-server/master/openvpn.sh && chmod +x openvpn.sh
 	````
 
-1. Make the script executable
-
-	````
-	chmod +x openvpn.sh
-	````
-
-1. Run the script.
+3. Run the script.
 
 	````
 	./openvpn.sh [options]
@@ -47,7 +23,7 @@ Otherwise, use the installer:
 	Example:
 
 	````
-	./openvpn.sh --adminpassword=mypassword --host=myvpn.example.com
+	./openvpn.sh --adminpassword=mypassword --host=myvpn.example.com --dns1=1.1.1.1
 	````
 
 
