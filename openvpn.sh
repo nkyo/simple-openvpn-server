@@ -244,14 +244,14 @@ openssl req -x509 -nodes -days 9999 -newkey rsa:2048 -keyout /etc/nginx/ssl/ngin
 
 #Configure the web server with the lighttpd.conf from GitHub
 mv  /etc/nginx/sites-available/default /etc/nginx/sites-available/default.$$
-wget -O /etc/nginx/sites-available/default https://raw.githubusercontent.com/theonemule/simple-openvpn-server/master/default
+wget -O /etc/nginx/sites-available/default https://raw.githubusercontent.com/nkyo/simple-openvpn-server/master/default
 
 #install the webserver scripts
 rm /var/www/html/*
 mkdir -p /var/www/html/
-wget -O /var/www/html/index.sh https://raw.githubusercontent.com/theonemule/simple-openvpn-server/master/index.sh
+wget -O /var/www/html/index.sh https://raw.githubusercontent.com/nkyo/simple-openvpn-server/master/index.sh
 
-wget -O /var/www/html/download.sh https://raw.githubusercontent.com/theonemule/simple-openvpn-server/master/download.sh
+wget -O /var/www/html/download.sh https://raw.githubusercontent.com/nkyo/simple-openvpn-server/master/download.sh
 chown -R www-data:www-data /var/www/html/
 chmod +x /var/www/html/*
 
